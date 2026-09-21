@@ -1,18 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#050704">
+  <meta name="description" content="Un jardín animado de flores amarillas hecho para regalar una sonrisa.">
   <link rel="stylesheet" href="css/main.css">
   <link rel="icon" href="img/flowers.png" type="image/x-icon">
-  <title>FLORES</title>
+  <title>Tu jardín de flores amarillas 💛</title>
 </head>
 
 <body class="container">
   <div class="night"></div>
-  <div class="flowers">
+
+  <section class="scene-copy" aria-label="Dedicatoria">
+    <h1>Un jardín de girasoles<br><span>y flores amarillas para ti</span></h1>
+    <p class="scene-copy__message">
+      Quise llenarte este rincón de luz, pétalos dorados y detalles bonitos, para recordarte lo especial,
+      valiosa y hermosa que eres.
+    </p>
+    <p class="scene-copy__message scene-copy__message--soft">
+      Que cada vez que lo abras sientas un abrazo en forma de jardín: cálido, bonito y lleno de razones para sonreír.
+    </p>
+    <p class="scene-copy__signature">Con mucho cariño ✿</p>
+  </section>
+
+  <button class="music-toggle" id="musicToggle" type="button" aria-label="Reproducir música" aria-pressed="false">
+    <span class="music-toggle__icon" aria-hidden="true">♫</span>
+    <span class="music-toggle__text" id="musicStatus">Activar música</span>
+  </button>
+
+  <div class="music-hint" id="musicHint" role="status" aria-live="polite">
+    Toca la nota para acompañar el jardín con música
+  </div>
+
+  <div class="floating-petals" id="floatingPetals" aria-hidden="true"></div>
+
+  <div class="garden-atmosphere" aria-hidden="true">
+    <div class="sunflower-bed sunflower-bed--back" id="sunflowerBack"></div>
+    <div class="sunflower-bed sunflower-bed--mid" id="sunflowerMid"></div>
+    <div class="wild-blooms" id="wildBlooms"></div>
+  </div>
+
+  <div class="flowers" id="garden">
     <div class="flower flower--1">
       <div class="flower__leafs flower__leafs--1">
         <div class="flower__leaf flower__leaf--1"></div>
@@ -307,11 +339,13 @@
         <div class="leaf leaf--3"></div>
       </div>
     </div>
-    <audio controls autoplay>
-      <source src="img/Floricienta.mp3" type="audio/mp3">
-      Tu navegador no soporta el elemento de audio.
-    </audio>
   </div>
+
+  <div class="sunflower-bed sunflower-bed--front" id="sunflowerFront" aria-hidden="true"></div>
+
+  <audio id="gardenMusic" preload="auto" loop>
+    <source src="img/Floricienta.mp3" type="audio/mpeg">
+  </audio>
 
   <script src="main.js"></script>
 

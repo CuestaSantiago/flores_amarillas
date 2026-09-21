@@ -1,37 +1,75 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#070905">
+    <meta name="description" content="Un pequeño jardín de flores amarillas hecho con cariño.">
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" href="img/flowers.png" type="image/x-icon">
-    <title>FLORES</title>
+    <title>Flores amarillas para ti 💛</title>
 </head>
 <body>
-    <div class="greetings">
+    <main class="welcome" aria-labelledby="welcome-title">
+        <div class="ambient-glow ambient-glow--one" aria-hidden="true"></div>
+        <div class="ambient-glow ambient-glow--two" aria-hidden="true"></div>
 
-        <span>H</span>
-        <span>O</span>
-        <span>L</span>
-        <span>A</span>
-    </div>
-    <div class="greetings">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
-    <div class="description">
-        <span>Tengo un regalo especial para ti!!</span>
-    </div>
-    <div class="button">
-        <button>
-            <a href="FLORES.html">Haga Clic</a>
-        </button>
-        
-    </div>
+        <div class="petals" aria-hidden="true">
+            <span style="--x: 8%; --d: 0s; --s: .7; --r: 16deg"></span>
+            <span style="--x: 18%; --d: 2.4s; --s: .5; --r: -18deg"></span>
+            <span style="--x: 31%; --d: 4.8s; --s: .85; --r: 9deg"></span>
+            <span style="--x: 46%; --d: 1.2s; --s: .55; --r: -24deg"></span>
+            <span style="--x: 61%; --d: 3.2s; --s: .72; --r: 21deg"></span>
+            <span style="--x: 74%; --d: 5.1s; --s: .6; --r: -12deg"></span>
+            <span style="--x: 88%; --d: 1.8s; --s: .8; --r: 27deg"></span>
+            <span style="--x: 95%; --d: 4.1s; --s: .48; --r: -8deg"></span>
+        </div>
+
+        <section class="welcome-card">
+            <div class="flower-mark" aria-hidden="true">
+                <span></span><span></span><span></span><span></span>
+                <i></i>
+            </div>
+
+            <p class="eyebrow">21 de septiembre · un detalle hecho con cariño</p>
+            <h1 id="welcome-title">Te preparé un jardín<br><em>lleno de flores amarillas</em></h1>
+            <p class="welcome-copy">
+                No quería regalarte solo una flor, sino un rincón entero con girasoles, pétalos dorados y música suave,
+                para que lo abras cuando quieras sentir algo bonito.
+            </p>
+
+            <button class="open-garden" id="openGarden" type="button">
+                <span>Abrir mi jardín</span>
+                <span class="open-garden__icon" aria-hidden="true">✦</span>
+            </button>
+
+            <div class="welcome-badges" aria-hidden="true">
+                <span>🌻 Girasoles</span>
+                <span>✨ Pétalos dorados</span>
+                <span>♫ Música</span>
+            </div>
+        </section>
+
+        <div class="ground-flowers ground-flowers--left" aria-hidden="true">
+            <span>🌻</span><span>🌻</span><span>🌼</span><span>🌻</span><span>🌼</span>
+        </div>
+        <div class="ground-flowers ground-flowers--right" aria-hidden="true">
+            <span>🌻</span><span>🌻</span><span>🌼</span><span>🌻</span><span>🌼</span>
+        </div>
+    </main>
+
+    <script>
+        const openGarden = document.getElementById('openGarden');
+
+        openGarden.addEventListener('click', () => {
+            sessionStorage.setItem('yellowFlowersMusicRequested', 'true');
+            document.body.classList.add('is-leaving');
+
+            window.setTimeout(() => {
+                window.location.href = 'FLORES.html';
+            }, 420);
+        });
+    </script>
 </body>
 </html>
