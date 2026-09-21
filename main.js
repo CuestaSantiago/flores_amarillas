@@ -8,8 +8,11 @@ const sunflowerBack = document.getElementById('sunflowerBack');
 const sunflowerMid = document.getElementById('sunflowerMid');
 const sunflowerFront = document.getElementById('sunflowerFront');
 const wildBlooms = document.getElementById('wildBlooms');
+const tulipBack = document.getElementById('tulipBack');
+const tulipFront = document.getElementById('tulipFront');
 
 const extraFlowers = [
+  { template: 0, x: '-62vw', scale: .44, bottom: '-1vmin', z: 4, opacity: .48, edge: true },
   { template: 0, x: '-44vw', scale: .72, bottom: '-4vmin', z: 6, opacity: .86 },
   { template: 1, x: '42vw', scale: .74, bottom: '-4vmin', z: 6, opacity: .86 },
   { template: 2, x: '-30vw', scale: .62, bottom: '0vmin', z: 7, opacity: .9 },
@@ -25,7 +28,13 @@ const extraFlowers = [
   { template: 0, x: '-26vw', scale: .32, bottom: '-2vmin', z: 4, opacity: .48, back: true },
   { template: 1, x: '25vw', scale: .3, bottom: '-2vmin', z: 4, opacity: .48, back: true },
   { template: 2, x: '-58vw', scale: .34, bottom: '-1vmin', z: 4, opacity: .42, edge: true },
-  { template: 0, x: '58vw', scale: .34, bottom: '-1vmin', z: 4, opacity: .42, edge: true }
+  { template: 0, x: '58vw', scale: .34, bottom: '-1vmin', z: 4, opacity: .42, edge: true },
+  { template: 1, x: '-47vw', scale: .5, bottom: '0vmin', z: 6, opacity: .74 },
+  { template: 2, x: '47vw', scale: .5, bottom: '0vmin', z: 6, opacity: .74 },
+  { template: 0, x: '-33vw', scale: .44, bottom: '3vmin', z: 8, opacity: .84 },
+  { template: 1, x: '33vw', scale: .44, bottom: '3vmin', z: 8, opacity: .84 },
+  { template: 2, x: '-3vw', scale: .4, bottom: '4vmin', z: 9, opacity: .82 },
+  { template: 0, x: '4vw', scale: .38, bottom: '4vmin', z: 9, opacity: .82 }
 ];
 
 const sunflowerLayouts = {
@@ -39,7 +48,9 @@ const sunflowerLayouts = {
     { x: 67, stem: 18, size: 44, scale: .74, sway: '-1.8deg', delay: '.6s' },
     { x: 77, stem: 20, size: 49, scale: .8, sway: '1.7deg', delay: '.35s' },
     { x: 87, stem: 17, size: 41, scale: .7, sway: '-1.1deg', delay: '.55s' },
-    { x: 94, stem: 19, size: 40, scale: .68, sway: '1.2deg', delay: '.25s' }
+    { x: 94, stem: 19, size: 40, scale: .68, sway: '1.2deg', delay: '.25s' },
+    { x: 72, stem: 17, size: 38, scale: .64, sway: '-1.3deg', delay: '.42s' },
+    { x: 30, stem: 18, size: 40, scale: .66, sway: '1.1deg', delay: '.18s' }
   ],
   mid: [
     { x: 3, stem: 22, size: 52, scale: .92, sway: '-1.7deg', delay: '.55s' },
@@ -52,7 +63,10 @@ const sunflowerLayouts = {
     { x: 66, stem: 28, size: 64, scale: 1.02, sway: '1.1deg', delay: '.74s' },
     { x: 75, stem: 24, size: 58, scale: .96, sway: '-1.2deg', delay: '.25s' },
     { x: 84, stem: 29, size: 66, scale: 1.04, sway: '1.5deg', delay: '.66s' },
-    { x: 92, stem: 23, size: 52, scale: .92, sway: '-1.8deg', delay: '.38s' }
+    { x: 92, stem: 23, size: 52, scale: .92, sway: '-1.8deg', delay: '.38s' },
+    { x: 52, stem: 27, size: 62, scale: 1.02, sway: '-1.2deg', delay: '.48s' },
+    { x: 88, stem: 25, size: 56, scale: .96, sway: '1.1deg', delay: '.58s' },
+    { x: 7, stem: 24, size: 54, scale: .94, sway: '-1.1deg', delay: '.22s' }
   ],
   front: [
     { x: 7, stem: 21, size: 58, scale: .98, sway: '-1.8deg', delay: '.45s' },
@@ -63,16 +77,70 @@ const sunflowerLayouts = {
     { x: 59, stem: 22, size: 62, scale: 1, sway: '1.3deg', delay: '.68s' },
     { x: 72, stem: 20, size: 57, scale: .94, sway: '-1.6deg', delay: '.4s' },
     { x: 83, stem: 23, size: 64, scale: 1.05, sway: '1.4deg', delay: '.76s' },
-    { x: 94, stem: 18, size: 52, scale: .88, sway: '-1deg', delay: '.24s' }
+    { x: 94, stem: 18, size: 52, scale: .88, sway: '-1deg', delay: '.24s' },
+    { x: 29, stem: 20, size: 56, scale: .92, sway: '1.2deg', delay: '.31s' },
+    { x: 52, stem: 21, size: 60, scale: .98, sway: '-1.1deg', delay: '.54s' },
+    { x: 66, stem: 19, size: 54, scale: .9, sway: '1deg', delay: '.71s' }
   ]
 };
 
 const bloomPalette = ['#ffe461', '#ffeb86', '#fce25a', '#fff0a8'];
 
+const tulipLayouts = {
+  back: [
+    { x: 8, stem: 10, size: 18, tilt: '-6deg', delay: '.1s' },
+    { x: 20, stem: 12, size: 20, tilt: '5deg', delay: '.2s' },
+    { x: 33, stem: 11, size: 19, tilt: '-4deg', delay: '.3s' },
+    { x: 45, stem: 13, size: 21, tilt: '3deg', delay: '.15s' },
+    { x: 56, stem: 11, size: 18, tilt: '-5deg', delay: '.38s' },
+    { x: 69, stem: 12, size: 19, tilt: '4deg', delay: '.18s' },
+    { x: 81, stem: 11, size: 18, tilt: '-4deg', delay: '.28s' },
+    { x: 92, stem: 10, size: 17, tilt: '3deg', delay: '.4s' }
+  ],
+  front: [
+    { x: 4, stem: 12, size: 22, tilt: '-5deg', delay: '.12s' },
+    { x: 14, stem: 11, size: 20, tilt: '4deg', delay: '.24s' },
+    { x: 27, stem: 13, size: 23, tilt: '-3deg', delay: '.32s' },
+    { x: 40, stem: 12, size: 21, tilt: '5deg', delay: '.14s' },
+    { x: 52, stem: 13, size: 24, tilt: '-4deg', delay: '.42s' },
+    { x: 64, stem: 11, size: 20, tilt: '3deg', delay: '.22s' },
+    { x: 76, stem: 12, size: 22, tilt: '-5deg', delay: '.35s' },
+    { x: 88, stem: 11, size: 19, tilt: '4deg', delay: '.18s' },
+    { x: 96, stem: 10, size: 18, tilt: '-3deg', delay: '.28s' }
+  ]
+};
+
+function createTulip(config, bedClass) {
+  const flower = document.createElement('div');
+  flower.className = `tulip ${bedClass}`.trim();
+  flower.style.setProperty('--x', `${config.x}%`);
+  flower.style.setProperty('--stem', `${config.stem}vmin`);
+  flower.style.setProperty('--size', `${config.size}px`);
+  flower.style.setProperty('--tilt', config.tilt);
+  flower.style.setProperty('--delay', config.delay || '0s');
+  flower.innerHTML = `
+    <span class="tulip__stem"></span>
+    <span class="tulip__leaf tulip__leaf--left"></span>
+    <span class="tulip__leaf tulip__leaf--right"></span>
+    <span class="tulip__head">
+      <i class="tulip__petal tulip__petal--left"></i>
+      <i class="tulip__petal tulip__petal--center"></i>
+      <i class="tulip__petal tulip__petal--right"></i>
+    </span>
+  `;
+  return flower;
+}
+
+function buildTulipLayer(target, configs, bedClass) {
+  if (!target) return;
+  target.innerHTML = '';
+  configs.forEach((config) => target.appendChild(createTulip(config, bedClass)));
+}
+
 function buildExtraFlowers() {
   if (!garden) return;
 
-  const templates = [...garden.querySelectorAll(':scope > .flower')].slice(0, 3);
+  const templates = Array.prototype.filter.call(garden.children, (child) => child.classList && child.classList.contains('flower')).slice(0, 3);
   if (templates.length < 3) return;
 
   extraFlowers.forEach((config, index) => {
@@ -122,6 +190,7 @@ function createSunflower(config, index, bedClass = '') {
 
 function buildSunflowerLayer(target, configs, bedClass) {
   if (!target) return;
+  target.innerHTML = '';
   configs.forEach((config, index) => target.appendChild(createSunflower(config, index, bedClass)));
 }
 
@@ -129,7 +198,7 @@ function buildWildBlooms() {
   if (!wildBlooms) return;
 
   const isSmallScreen = window.matchMedia('(max-width: 760px)').matches;
-  const total = isSmallScreen ? 16 : 28;
+  const total = isSmallScreen ? 22 : 46;
 
   for (let index = 0; index < total; index += 1) {
     const bloom = document.createElement('span');
@@ -149,7 +218,7 @@ function buildPetals() {
   if (!floatingPetals) return;
 
   const isSmallScreen = window.matchMedia('(max-width: 700px)').matches;
-  const amount = isSmallScreen ? 18 : 34;
+  const amount = isSmallScreen ? 22 : 42;
 
   for (let index = 0; index < amount; index += 1) {
     const petal = document.createElement('span');
@@ -237,8 +306,10 @@ if (musicToggle && music) {
 window.addEventListener('load', async () => {
   buildExtraFlowers();
   buildSunflowerLayer(sunflowerBack, sunflowerLayouts.back, 'sunflower--back');
+  buildTulipLayer(tulipBack, tulipLayouts.back, 'tulip--back');
   buildSunflowerLayer(sunflowerMid, sunflowerLayouts.mid, 'sunflower--mid');
   buildSunflowerLayer(sunflowerFront, sunflowerLayouts.front, 'sunflower--front');
+  buildTulipLayer(tulipFront, tulipLayouts.front, 'tulip--front');
   buildWildBlooms();
   buildPetals();
 
@@ -260,7 +331,8 @@ window.addEventListener('load', async () => {
 
     if (!started) {
       document.addEventListener('pointerdown', (event) => {
-        if (event.target.closest?.('#musicToggle')) return;
+        const target = event.target;
+        if (target && typeof target.closest === 'function' && target.closest('#musicToggle')) return;
         playMusic();
       }, { once: true });
     }

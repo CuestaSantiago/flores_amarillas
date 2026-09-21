@@ -2039,3 +2039,285 @@ body::after {
 
   .wild-bloom:nth-child(2n) { display: none; }
 }
+
+
+/* --- Layout and compatibility fixes --- */
+html, body {
+  min-height: 100vh;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.flowers {
+  width: min(100vw, 1500px);
+  transform: scale(.98) translateY(1vmin);
+  transform-origin: bottom center;
+}
+
+.scene-copy {
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.music-toggle,
+.music-hint {
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.sunflower-bed--back { height: 28vmin; }
+.sunflower-bed--mid { height: 34vmin; }
+.sunflower-bed--front { height: 38vmin; }
+.wild-blooms { height: 24vmin; }
+
+.extra-flower-wrap > .flower {
+  transform-origin: bottom center;
+}
+
+@media (min-width: 1100px) {
+  .scene-copy {
+    left: 34px;
+    top: 26px;
+    width: min(520px, 38vw);
+    transform: none;
+    text-align: left;
+    padding: 18px 22px 18px;
+  }
+
+  .scene-copy__message,
+  .scene-copy__message--soft {
+    margin-left: 0;
+  }
+
+  .music-toggle {
+    top: 28px;
+    right: 26px;
+  }
+
+  .flowers {
+    transform: scale(1.04) translateY(2vmin);
+  }
+
+  .sunflower-bed--back {
+    height: 30vmin;
+  }
+
+  .sunflower-bed--mid {
+    height: 36vmin;
+  }
+
+  .sunflower-bed--front {
+    height: 42vmin;
+  }
+
+  .wild-blooms {
+    height: 26vmin;
+  }
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .scene-copy,
+  .music-toggle,
+  .music-hint {
+    background: rgba(8, 10, 6, .9);
+  }
+}
+
+@media (max-width: 900px) {
+  .flowers {
+    transform: scale(.84) translateY(4vmin);
+  }
+}
+
+@media (max-width: 760px) {
+  body {
+    min-height: 100vh;
+    min-height: 100svh;
+  }
+
+  .flowers {
+    width: 100vw;
+    transform: scale(.74) translateY(4vmin);
+  }
+
+  .sunflower-bed--front {
+    height: 34vmin;
+  }
+
+  .wild-blooms {
+    height: 18vmin;
+  }
+}
+
+@media (max-width: 430px) {
+  .scene-copy {
+    max-height: 38vh;
+    overflow: auto;
+  }
+
+  .scene-copy::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+
+  .flowers {
+    transform: scale(.69) translateY(7vmin);
+  }
+}
+
+
+/* --- Final desktop card fix + extra flower variety --- */
+.tulip-bed {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 18vmin;
+  pointer-events: none;
+}
+
+.tulip-bed--back {
+  z-index: 7;
+  opacity: .72;
+}
+
+.tulip-bed--front {
+  z-index: 16;
+  opacity: .9;
+}
+
+.tulip {
+  position: absolute;
+  left: var(--x);
+  bottom: 0;
+  width: calc(var(--size) * 1px);
+  height: calc(var(--stem) + var(--size));
+  transform: translateX(-50%) rotate(var(--tilt));
+  transform-origin: bottom center;
+  animation: tulip-sway 5.4s ease-in-out var(--delay) infinite;
+}
+
+.tulip__stem {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 4px;
+  height: var(--stem);
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: linear-gradient(180deg, #66b83b, #2a6f19 68%, #1c5610);
+}
+
+.tulip__leaf {
+  position: absolute;
+  bottom: calc(var(--stem) * .25);
+  width: calc(var(--size) * .45px);
+  height: calc(var(--size) * .18px);
+  background: linear-gradient(160deg, #5ca62f, #215b13);
+  border-radius: 100% 0 100% 0;
+}
+
+.tulip__leaf--left {
+  left: 50%;
+  transform: translateX(-100%) rotate(-25deg);
+}
+
+.tulip__leaf--right {
+  left: 50%;
+  transform: translateX(5%) scaleX(-1) rotate(-25deg);
+}
+
+.tulip__head {
+  position: absolute;
+  left: 50%;
+  bottom: calc(var(--stem) - 1px);
+  width: calc(var(--size) * 1px);
+  height: calc(var(--size) * .95px);
+  transform: translateX(-50%);
+}
+
+.tulip__petal {
+  position: absolute;
+  bottom: 0;
+  width: 42%;
+  height: 86%;
+  background: linear-gradient(180deg, #fff2a7, #ffe15a 42%, #efb90e 100%);
+  border-radius: 70% 70% 30% 30%;
+  box-shadow: inset 0 -1px 0 rgba(139, 88, 0, .22), 0 0 10px rgba(255, 216, 52, .12);
+}
+
+.tulip__petal--left {
+  left: 10%;
+  transform: rotate(-16deg);
+}
+
+.tulip__petal--center {
+  left: 29%;
+  width: 42%;
+  height: 100%;
+  z-index: 2;
+  border-radius: 58% 58% 26% 26%;
+}
+
+.tulip__petal--right {
+  right: 10%;
+  transform: rotate(16deg);
+}
+
+@keyframes tulip-sway {
+  0%, 100% { transform: translateX(-50%) rotate(calc(var(--tilt) - 1deg)); }
+  50% { transform: translateX(-50%) rotate(calc(var(--tilt) + 1.6deg)); }
+}
+
+@media (min-width: 1100px) {
+  .scene-copy {
+    left: 26px !important;
+    top: 26px !important;
+    width: min(500px, 34vw) !important;
+    max-width: 500px;
+    transform: none !important;
+    animation: scene-copy-desktop-in 1s 1s ease forwards !important;
+  }
+
+  .scene-copy h1 {
+    font-size: clamp(1.85rem, 3vw, 3rem);
+    line-height: .96;
+  }
+
+  .scene-copy__message,
+  .scene-copy__message--soft {
+    font-size: .92rem;
+    line-height: 1.48;
+    max-width: 100%;
+  }
+
+  .scene-copy__signature {
+    font-size: .92rem;
+  }
+
+  .flowers {
+    transform: scale(1.03) translateY(1vmin);
+  }
+}
+
+@keyframes scene-copy-desktop-in {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 760px) {
+  .tulip-bed {
+    height: 14vmin;
+  }
+}
+
+@media (max-width: 430px) {
+  .tulip-bed--back,
+  .tulip-bed--front .tulip:nth-child(2n) {
+    display: none;
+  }
+}

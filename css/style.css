@@ -470,3 +470,137 @@ body.is-leaving .welcome-card {
         padding: 7px 11px;
     }
 }
+
+
+/* --- Cross-browser and large-screen fixes --- */
+html, body {
+    min-height: 100vh;
+}
+
+body {
+    min-height: 100vh;
+    min-height: 100svh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.welcome {
+    min-height: 100vh;
+    min-height: 100svh;
+    overflow: visible;
+    align-content: center;
+    padding: clamp(22px, 4vw, 54px) clamp(18px, 3vw, 32px) clamp(80px, 10vh, 118px);
+}
+
+.welcome-card {
+    width: min(700px, 100%);
+    max-width: 100%;
+    max-height: calc(100vh - 44px);
+    max-height: calc(100svh - 44px);
+    overflow: auto;
+    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(18px);
+}
+
+.welcome-card::-webkit-scrollbar {
+    width: 6px;
+}
+
+.welcome-card::-webkit-scrollbar-thumb {
+    background: rgba(255, 225, 85, .18);
+    border-radius: 999px;
+}
+
+h1,
+.welcome-copy,
+.sound-note {
+    text-wrap: pretty;
+}
+
+h1 {
+    font-size: clamp(2.25rem, 4.9vw, 4.4rem);
+}
+
+.welcome-copy {
+    margin-top: 20px;
+    font-size: clamp(.95rem, 1.45vw, 1.08rem);
+    line-height: 1.6;
+}
+
+.welcome-actions {
+    position: sticky;
+    bottom: 0;
+    z-index: 6;
+    margin-top: 24px;
+    padding-top: 10px;
+    background: linear-gradient(180deg, rgba(13, 15, 9, 0), rgba(13, 15, 9, .72) 36%, rgba(13, 15, 9, .9) 100%);
+}
+
+.open-garden {
+    margin-top: 0;
+    width: min(100%, 320px);
+}
+
+.sound-note {
+    margin-top: 12px;
+}
+
+.welcome-badges {
+    margin-top: 14px;
+}
+
+.ground-flowers {
+    bottom: 14px;
+    z-index: 0;
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .welcome-card,
+    .welcome-badges span {
+        background: rgba(16, 18, 11, .94);
+    }
+}
+
+@media (min-width: 1200px) {
+    .welcome {
+        padding-top: 38px;
+        padding-bottom: 88px;
+    }
+
+    .welcome-card {
+        width: min(680px, 92vw);
+        padding: 34px 42px 28px;
+    }
+
+    .welcome-copy {
+        max-width: 570px;
+    }
+}
+
+@media (max-width: 900px) {
+    .welcome-card {
+        max-height: none;
+        overflow: visible;
+    }
+
+    .welcome-actions {
+        position: relative;
+        background: none;
+        padding-top: 0;
+    }
+}
+
+@media (max-width: 600px) {
+    h1 {
+        font-size: clamp(2rem, 11vw, 3.4rem);
+    }
+
+    .welcome {
+        padding-bottom: 60px;
+    }
+
+    .welcome-card {
+        width: min(560px, 100%);
+    }
+}
